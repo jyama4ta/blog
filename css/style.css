@@ -117,12 +117,6 @@ a:hover {
   text-decoration: underline;
 }
 @font-face {
-  font-family: SourceHanCodeJP;
-  font-style: normal;
-  font-weight: normal;
-  src: url("fonts/SourceHanCodeJP-Normal.otf") format('opentype');
-}
-@font-face {
   font-family: FontAwesome;
   font-style: normal;
   font-weight: normal;
@@ -136,11 +130,11 @@ body,
 }
 body {
   background: #e6e6e6;
-  font: 14px "Segoe UI", "SegoeUI", "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif;
+  font: 16px "Segoe UI", "SegoeUI", "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif;
   -webkit-text-size-adjust: 100%;
 }
 .outer {
-  max-width: 1220px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -155,8 +149,8 @@ body {
 .inner {
   display: inline;
   float: left;
-  width: 98.33333333333333%;
-  margin: 0 0.833333333333333%;
+  width: 98.46153846153847%;
+  margin: 0 0.769230769230769%;
   margin-left: 18px;
 }
 .left,
@@ -196,8 +190,8 @@ body {
   #main {
     display: inline;
     float: left;
-    width: 73.33333333333333%;
-    margin: 0 0.833333333333333%;
+    width: 75.38461538461539%;
+    margin: 0 0.769230769230769%;
   }
 }
 .article-date,
@@ -211,8 +205,7 @@ body {
   color: #737373;
   margin-top: 1em;
   margin-bottom: 1em;
-/*margin-left: 20px*/
-  margin-left: 10px;
+  margin-left: 20px;
   line-height: 1em;
   text-shadow: 0 1px #fff;
   font-weight: bold;
@@ -440,9 +433,9 @@ body {
 .nav-icon {
   font-family: FontAwesome;
   text-align: center;
-  font-size: 14px;
-  width: 14px;
-  height: 14px;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
   padding: 20px 15px;
   position: relative;
   cursor: pointer;
@@ -662,6 +655,7 @@ width: 100% {
 .article-entry h6 {
   line-height: 1.1em;
   margin: 1.1em 0;
+/* color: #f60 */
 }
 .article-entry a {
   color: #0065b3;
@@ -669,6 +663,42 @@ width: 100% {
 }
 .article-entry a:hover {
   text-decoration: underline;
+}
+.article-entry h1,
+.article-entry h2,
+.article-entry h3 {
+  position: relative;
+}
+.article-entry h1:hover .headerlink,
+.article-entry h2:hover .headerlink,
+.article-entry h3:hover .headerlink {
+  opacity: 1;
+}
+.article-entry .headerlink {
+  cursor: pointer;
+  position: absolute;
+  top: 0.1em;
+  left: -0.6em;
+  opacity: 0;
+  -webkit-transition: visibility 1s;
+  -moz-transition: visibility 1s;
+  -ms-transition: visibility 1s;
+  transition: visibility 1s;
+  color: #737373;
+  vertical-align: middle;
+}
+.article-entry .headerlink:hover {
+  text-decoration: none;
+}
+.article-entry .headerlink:before {
+  position: absolute;
+  content: "\f0c1";
+  font-family: FontAwesome;
+  font-size: 0.6em;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
 }
 .article-entry ul,
 .article-entry ol,
@@ -702,17 +732,15 @@ width: 100% {
   padding: 10px 0;
 }
 .article-entry blockquote {
-/*font-family: font-serif*/
-  font-family: SourceHanCodeJP;
+  font-family: "Segoe UI", "SegoeUI", "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif;
   font-style: italic;
   margin: 1.6em 20px;
   background-color: #f6f6f6;
 }
 .article-entry blockquote footer {
-  font-size: 14px;
+  font-size: 16px;
   margin: 1.6em 0;
-/*font-family: font-sans*/
-  font-family: SourceHanCodeJP;
+  font-family: "Segoe UI", "SegoeUI", "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif;
 }
 .article-entry blockquote footer cite:before {
   content: "—";
@@ -839,8 +867,7 @@ width: 100% {
   padding-right: 6px;
 }
 .article-disclaimer {
-/*font-family: font-serif*/
-  font-family: SourceHanCodeJP;
+  font-family: "Segoe UI", "SegoeUI", "Segoe WP", "Helvetica Neue", "Helvetica", "Tahoma", "Arial", sans-serif;
   font-style: italic;
   margin: 1.6em 20px;
   background-color: #f6f6f6;
@@ -1063,6 +1090,72 @@ width: 100% {
   max-width: 100%;
   margin: 0 auto;
 }
+div.alert {
+  display: block;
+  padding: 0.5em 1em;
+  margin: 2em 0;
+  color: #5d627b;
+  background: #fff;
+  border-top: solid 10px;
+  -webkit-box-shadow: 0 3px 5px rgba(0,0,0,0.22);
+  box-shadow: 0 3px 5px rgba(0,0,0,0.22);
+}
+div.alert p {
+  margin-top: 0rem;
+  margin-bottom: 0;
+}
+div.alert p.alert-title {
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+div.alert.is-info {
+  border-color: #e2daf1;
+}
+div.alert.is-info .alert-title:before {
+  content: "\f06a";
+  font-family: FontAwesome;
+  padding-right: 6px;
+}
+div.alert.is-warning {
+  border-color: #fff1cc;
+}
+div.alert.is-warning .alert-title:before {
+  content: "\f071";
+  font-family: FontAwesome;
+  padding-right: 6px;
+}
+div.alert.is-important {
+  border-color: #e0f2ff;
+}
+div.alert.is-important .alert-title:before {
+  content: "\f06a";
+  font-family: FontAwesome;
+  padding-right: 6px;
+}
+div.alert.is-caution {
+  border-color: #ffdacc;
+}
+div.alert.is-caution .alert-title:before {
+  content: "\f057";
+  font-family: FontAwesome;
+  padding-right: 6px;
+}
+div.alert.is-success {
+  border-color: #d2f9d2;
+}
+div.alert.is-success .alert-title:before {
+  content: "\f0eb";
+  font-family: FontAwesome;
+  padding-right: 6px;
+}
+div.alert.is-question {
+  border-color: #d2f9d2;
+}
+div.alert.is-question .alert-title:before {
+  content: "\f059";
+  font-family: FontAwesome;
+  padding-right: 6px;
+}
 #comments {
   background: #fff;
   -webkit-box-shadow: 1px 2px 3px #ddd;
@@ -1209,7 +1302,7 @@ width: 100% {
   border-width: 1px 0;
   overflow: auto;
   color: #ccc;
-  line-height: 22.400000000000002px;
+  line-height: 25.6px;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
@@ -1218,8 +1311,7 @@ width: 100% {
 }
 .article-entry pre,
 .article-entry code {
-/*font-family: font-mono*/
-  font-family: SourceHanCodeJP;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", Courier, monospace;
 }
 .article-entry code {
   background: #e6e6e6;
@@ -1266,7 +1358,7 @@ width: 100% {
   padding-right: 20px;
 }
 .article-entry .highlight .line {
-  height: 22.400000000000002px;
+  height: 25.6px;
 }
 .article-entry .highlight .line.marked {
   background: #515151;
@@ -1281,8 +1373,7 @@ width: 100% {
 }
 .article-entry .gist .gist-file {
   border: none;
-/*font-family: font-mono*/
-  font-family: SourceHanCodeJP;
+  font-family: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", Courier, monospace;
   margin: 0;
 }
 .article-entry .gist .gist-file .gist-data {
@@ -1426,8 +1517,8 @@ a#issue-header:hover {
   #sidebar {
     display: inline;
     float: left;
-    width: 23.333333333333332%;
-    margin: 0 0.833333333333333%;
+    width: 21.53846153846154%;
+    margin: 0 0.769230769230769%;
   }
 }
 .widget-wrap {
