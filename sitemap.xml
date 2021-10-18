@@ -51,6 +51,13 @@
   </url>
   
   <url>
+    <loc>https://jpaztech.github.io/blog/vm/resource-health-alert/</loc>
+    
+    <lastmod>2021-10-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpaztech.github.io/blog/vm/resourcegroup-uppercase-lowercase/</loc>
     
     <lastmod>2021-10-18</lastmod>
@@ -65,20 +72,6 @@
   </url>
   
   <url>
-    <loc>https://jpaztech.github.io/blog/vm/resource-delete/</loc>
-    
-    <lastmod>2021-10-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpaztech.github.io/blog/vm/resource-health-alert/</loc>
-    
-    <lastmod>2021-10-18</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpaztech.github.io/blog/vm/re-install-windows-azure-guest-agent/</loc>
     
     <lastmod>2021-10-18</lastmod>
@@ -86,7 +79,21 @@
   </url>
   
   <url>
+    <loc>https://jpaztech.github.io/blog/vm/resource-delete/</loc>
+    
+    <lastmod>2021-10-18</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://jpaztech.github.io/blog/vm/plwv-bt0/</loc>
+    
+    <lastmod>2021-10-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpaztech.github.io/blog/vm/linux-expand-os-disk/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
@@ -115,13 +122,6 @@
   
   <url>
     <loc>https://jpaztech.github.io/blog/vm/introduction-performance-tier-ssd/</loc>
-    
-    <lastmod>2021-10-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpaztech.github.io/blog/vm/linux-expand-os-disk/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
@@ -177,14 +177,14 @@
   </url>
   
   <url>
-    <loc>https://jpaztech.github.io/blog/vm/20211013-rca-azure-vm/</loc>
+    <loc>https://jpaztech.github.io/blog/vm/change-availability-zone-from-portal/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
   </url>
   
   <url>
-    <loc>https://jpaztech.github.io/blog/vm/change-availability-zone-from-portal/</loc>
+    <loc>https://jpaztech.github.io/blog/vm/20211013-rca-azure-vm/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
@@ -206,6 +206,20 @@
   
   <url>
     <loc>https://jpaztech.github.io/blog/storage/storageAccount-Restore/</loc>
+    
+    <lastmod>2021-10-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpaztech.github.io/blog/network/vpngw-FAQ1/</loc>
+    
+    <lastmod>2021-10-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpaztech.github.io/blog/network/vpngw-how-to-check-maintenance/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
@@ -254,14 +268,7 @@
   </url>
   
   <url>
-    <loc>https://jpaztech.github.io/blog/network/vpngw-FAQ1/</loc>
-    
-    <lastmod>2021-10-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpaztech.github.io/blog/network/vpngw-how-to-check-maintenance/</loc>
+    <loc>https://jpaztech.github.io/blog/network/snat-options-for-azure-vm/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
@@ -317,13 +324,6 @@
   </url>
   
   <url>
-    <loc>https://jpaztech.github.io/blog/network/snat-options-for-azure-vm/</loc>
-    
-    <lastmod>2021-10-18</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpaztech.github.io/blog/network/appgw_change_subnet/</loc>
     
     <lastmod>2021-10-18</lastmod>
@@ -332,6 +332,13 @@
   
   <url>
     <loc>https://jpaztech.github.io/blog/network/bastion-nsg/</loc>
+    
+    <lastmod>2021-10-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpaztech.github.io/blog/network/appgw-troubleshooting-cert/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
@@ -394,13 +401,6 @@
   </url>
   
   <url>
-    <loc>https://jpaztech.github.io/blog/network/appgw-troubleshooting-cert/</loc>
-    
-    <lastmod>2021-10-18</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://jpaztech.github.io/blog/containers/aks-load-balancer-source-ranges/</loc>
     
     <lastmod>2021-10-18</lastmod>
@@ -409,6 +409,13 @@
   
   <url>
     <loc>https://jpaztech.github.io/blog/containers/aks-load-balancer-sku-and-snat-options/</loc>
+    
+    <lastmod>2021-10-18</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://jpaztech.github.io/blog/containers/aks-aad-pod-identity/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
@@ -430,13 +437,6 @@
   
   <url>
     <loc>https://jpaztech.github.io/blog/archive/upgrade-backup-container-asm2arm/</loc>
-    
-    <lastmod>2021-10-18</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://jpaztech.github.io/blog/containers/aks-aad-pod-identity/</loc>
     
     <lastmod>2021-10-18</lastmod>
     
