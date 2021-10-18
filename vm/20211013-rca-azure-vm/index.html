@@ -14,7 +14,7 @@
 <meta property="og:description" content="いつも Azure IaaS テクニカル サポート チームのブログを参照いただきましてありがとうございます。 今回は日本時間の 10&#x2F;13 に発生しました仮想マシンの障害について、RCA (Root Cause Analysis) レポートの日本語版の抄訳を紹介します。原文は 状態の履歴および根本原因分析 (RCA) を確認ください。 日本語版の抄訳の PDF については、以下のリンクよりダウンロ">
 <meta property="og:locale" content="ja_JP">
 <meta property="article:published_time" content="2021-10-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-17T06:31:06.472Z">
+<meta property="article:modified_time" content="2021-10-18T01:39:02.767Z">
 <meta property="article:author" content="Japan Azure IaaS Core Support Team">
 <meta property="article:tag" content="Windows">
 <meta property="article:tag" content="VM">
@@ -103,7 +103,7 @@
         
         <a href="https://github.com/jpaztech/blog/issues/new?title=&body=%0A%0A---%0A%0A%23%23%23%23+Document+Details%0A%0A%E2%9A%A0+*Do+not+edit+this+section.%0A%0A*+ID%3A+80046333-bd35-59d1-8558-99dff0db9b3f%0A*+%E5%AF%BE%E8%B1%A1%E8%A8%98%E4%BA%8B%3A+%5B2021+%E5%B9%B4+10+%E6%9C%88+13+%E6%97%A5%E3%81%AB%E7%99%BA%E7%94%9F%E3%81%97%E3%81%9F%E4%BB%AE%E6%83%B3%E3%83%9E%E3%82%B7%E3%83%B3%E3%81%AE%E5%95%8F%E9%A1%8C%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6+%28Tracking+ID+0NC_-L9G%29%5D%28https%3A%2F%2Fjpaztech.github.io%2Fblog%2Fvm%2F20211013-rca-azure-vm%2F%29%0A*+Content+Source%3A+%5Barticles%2Fvm%2F20211013-rca-azure-vm.md%5D%28https%3A%2F%2Fgithub.com%2Fjpaztech%2Fblog%2Fblob%2Fmaster%2Farticles%2Fvm%2F20211013-rca-azure-vm.md%29%0A*+Author%3A+" class="article-github-issue-link" target="_blank" rel="noopener noreferrer">feedback</a>
         
-        <a data-url="https://jpaztech.github.io/blog/vm/20211013-rca-azure-vm/" data-id="ckuuuokqr002m0np56cxr6wrl" class="article-share-link">共有</a>
+        <a data-url="https://jpaztech.github.io/blog/vm/20211013-rca-azure-vm/" data-id="ckuvzot87002m0mpc056o5byy" class="article-share-link">共有</a>
       </div>
     
     <div class="article-entry" itemprop="articleBody">
@@ -115,12 +115,12 @@
 <p>本障害では、仮想マシンをご利用いただいている一部のお客様に対し、多大なるご不便をおかけすることとなりました。あらためて、今回の障害により多くのお客様にご迷惑をお掛けしましたことを深くお詫び申し上げます。</p>
 <span id="more"></span>
 <h2 id="影響の概要"><a href="#影響の概要" class="headerlink" title="影響の概要:"></a>影響の概要:</h2><p>日本時間 10 月 13 日 午後 3 時 27 分から午後 9 時 42 分まで Windows ベースの仮想マシンをご利用されている一部のお客様で、起動、作成、更新、削除などの管理オペレーションを実施されている時、失敗のメッセージを受け取られた可能性がございます。また、新規仮想マシンのデプロイや拡張機能の更新も、失敗となっていた可能性がございます。可用性セットや仮想マシンのスケールセットへのオペレーションも同様に影響を受けていました。</p>
-<p><u>Windows ベースではない仮想マシンは影響を受けなかったものの、Windows の仮想マシンに依存しているサービスは、リソース作成時に同様の影響をうけていた可能性がございます。</u></p>
+<p><u>Windows ベースではない仮想マシンは影響を受けなかったものの、Windows の仮想マシンに依存しているサービスは、リソース作成時に同様の影響を受けていた可能性がございます。</u></p>
 <h2 id="原因"><a href="#原因" class="headerlink" title="原因:"></a>原因:</h2><p>Windows ベースの仮想マシンは、仮想マシンと Azure ファブリック間の相互作用を管理する Windows 仮想マシンエージェント(VM エージェント)を利用します。</p>
-<p>Windows 仮想マシンの作成や更新を実施する際、Computer Resource Provider（CRP）はプラットフォームイメージリポジトリに準拠して最新版のVMエージェントパッケージのダウンロードするロケーションを取得いたします。VM エージェントはこの取得した情報を用いて、仮想マシン内でエージェントを最新版に更新します。</p>
+<p>Windows 仮想マシンの作成や更新を実施する際、Computer Resource Provider（CRP）はプラットフォームイメージリポジトリから最新版の VM エージェントパッケージのダウンロードするロケーションを取得いたします。VM エージェントはこの取得した情報を用いて、仮想マシン内でエージェントを最新版に更新します。</p>
 <p>クラシックリソースを Azure Resource Manager (ARM) へ移行する行程の一つとして、弊社はイメージと拡張機能の発行元を、地域的(リージョナル)な ARM 発行パイプラインへマイグレーションしており、現在は約 20% 程完了しております。</p>
-<p>午後 3 時 27 分ころ、弊社内のツールはこれらの移行を行うため ARM テンプレートを提供しましたが、このツールはエッジケース（最大や最小限の動作パラメータでのみ発生する問題または状況) を考慮していなかったため、意図されてない結果として、マイグレーション後に、 ARM リージョナルサービス内でのみ発行されているサブスクリプションに対して、Windows VM エージェント拡張機能を表示されるようマークされてしまいました。その結果、地域的なプラットフォームイメージリポジトリから何も受け取れず（zero results）、VM 管理オペレーションが失敗し始めました。</p>
-<p>お客様の Windows 仮想マシンにおける起動、停止、作成や削除などのオペレーションは Windows VM エージェントの拡張機能を見つけるができなかったため、完了することができない結果となってしまいました。 </p>
+<p>午後 3 時 27 分ころ、弊社内のツールはこれらの移行を行うため ARM テンプレートを生成しましたが、このツールはエッジケース（最大や最小限の動作パラメータでのみ発生する問題または状況) を考慮していなかったため、意図されてない結果として、マイグレーション後に、 ARM リージョナルサービス内でのみ発行されているサブスクリプションに対して、Windows VM エージェント拡張機能が表示されるようマークされてしまいました。その結果、地域的なプラットフォームイメージリポジトリから何も受け取れず（zero results）、VM 管理オペレーションが失敗し始めました。</p>
+<p>お客様の Windows 仮想マシンにおける起動、停止、作成や削除などのオペレーションは Windows VM エージェントの拡張機能を見つけることができなかったため、完了することができない結果となってしまいました。 </p>
 <p>私たちの変更管理のプロセスの一部は、Safe Deployment Practice (SDP) のフレームワークをレバレッジすることです。<br><a target="_blank" rel="noopener" href="https://azure.microsoft.com/en-us/blog/advancing-safe-deployment-practices/">(https://azure.microsoft.com/en-us/blog/advancing-safe-deployment-practices/)</a>.　この場合、弊社クラシックモデルのインフラ機能のいくつかは SDP フレームワークと合致しません。この不適合性は私たちが ARM への完全なマイグレーションを行う重要性を強調するものになります。マイグレーションが完了しましたら、クラシックリソースに特化したツールを使わないまま、SDP フレームワーク使用し、すべて変更ができるようになります。</p>
 <h2 id="緩和策"><a href="#緩和策" class="headerlink" title="緩和策:"></a>緩和策:</h2><p>根本原因の特定にあたり、Azure コンポーネント用の複数のリリースがプラットフォーム上で同時に実行されており、それぞれを調査するため時間を要することになりました。根本的な原因を確実に特定できるよういくつかの想定されるシナリオを排除するため、それらに関連するコンポーネントに特化した技術者たち（SMEs）が調査対応を進めていたことも時間を要した理由でした。</p>
 <p>私たちは問題自体を確定し、いくつかの緩和策を確認した後、まず始めに一つの地域にて拡張機能を公開し影響を軽減させて、その結果を検証しました。そして仮想マシンへの膨大なリクエストでもこれ以上影響が出ない事を確認いたしました。この検証の後、一つ一つの地域で新しいパイプラインへの変更を展開し始め、事象緩和へと至りました。変更が完了した後、エンジニアたちはオペレーションの成功率を監視しておりました。</p>
@@ -128,7 +128,7 @@
 <ul>
 <li>すべての復旧作業が実施されるまで、未実施のパッケージ（Linux バージョンの VM エージェントも含む）のマイグレーションを一時中断します。</li>
 <li>追加の事前確認 (pre-check) と事後確認 (post-check) を開発し、実装いたします。</li>
-<li>VM エージェントが見つからなかった時の VM オペレーション失敗への耐性</li>
+<li>VM オペレーション中に VM エージェントが見つからないエラーが発生したとき、VM オペレーションがエラーから復旧できるよう改善いたします。</li>
 <li>エンジニア部門は各拡張タイプをフライトするため、そしてマイグレーションの残工程に存在しうる障害を防ぐために、他の安全策も評価しています。</li>
 </ul>
 <h2 id="フィードバックのお願い"><a href="#フィードバックのお願い" class="headerlink" title="フィードバックのお願い:"></a>フィードバックのお願い:</h2><p>Azure カスタマー・コミュニケーション・エクスペリエンスの向上のためのアンケートにご協力ください: <a target="_blank" rel="noopener" href="https://aka.ms/AzurePIRSurvey">https://aka.ms/AzurePIRSurvey</a></p>
